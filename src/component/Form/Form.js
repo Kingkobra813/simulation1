@@ -31,14 +31,25 @@ class Form extends Component {
         })
     }
 
+    updateProduct(id, name, price, img) {
+        const { getRequest } = this.props;
+        console.log(id, name, price, img);
+        axios
+            .put(`/api/product/${id}`, { name, price, img })
+            .then(res => {
+                getRequest();
+            })
+    }
+
+
     render() {
         return (
             <div>
                 <input onChange={this.handleNameChange}></input>
                 <input onChange={this.handlePriceChange}></input>
                 <input onChange={this.handleImgChange}></input>
-                <button onClick={this.handleCancelButton}>Cancel</button>
-                <button>Add To Inventory</button>
+                <button onClick={() => { this.handleCancelButton() }}>Cancel</button>
+                <button onClick={() => { this.updateProduct(name, price, img) }}>Add To Inventory</button>
             </div>
         )
     }

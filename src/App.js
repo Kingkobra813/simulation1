@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Dashboard from './component/Dashboard/Dashboard';
 import Form from './component/Form/Form'
 import Header from './component/Header/Header';
@@ -11,23 +12,27 @@ class App extends Component {
     super(props);
 
     this.state = {
-      inventory: {
-        name: "shoes",
-        price: 23,
-        imgurl: "http://imgurl.com"
-      }
+      inventory: [],
     }
   }
-  render() {
 
+  componentDidMount() {
+    axios.get('./api/inventory').then(response => {
+      this.setState({ inventory: response.data })
+    })
+  }
+
+  render() {
+    const { inventory, selectedId } = this.state;
     return (
       <div className="App">
         <Header />
         <Dashboard
-          value={this.state.inventory}
+          inventory={inventory}
+          getRequest={this.componentDidMount}
         />
         <Product />
-        <Form />
+        <Form getRequest={this.componentDidMount} selectedId={selectedId} />
       </div>
     );
   }

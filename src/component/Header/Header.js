@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
+import React from "react";
 
-class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div>
-                Header
-            </div>
-        )
-    }
-
+function Header() {
+    return (
+        <header className="header">
+            <p className="brandName">SHELFIE</p>
+        </header>
+    );
 }
+
 export default Header;
