@@ -13,6 +13,8 @@ app.use(cors())
 //endpoints
 app.get("/api/inventory", controller.getProducts);
 app.post("/api/product", controller.makeProduct);
+app.delete("/api/product/:id", controller.deleteProduct);
+app.put("/api/product/:id", controller.updateProduct);
 
 massive(process.env.CONNECTION_STRING).then(dbInstance => {
     app.set('db', dbInstance)

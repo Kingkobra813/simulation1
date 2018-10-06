@@ -6,6 +6,7 @@ import Header from './component/Header/Header';
 import Product from './component/Product/Product';
 import './App.css';
 
+const BASE_URL = "http://localhost:3005"
 
 class App extends Component {
   constructor(props) {
@@ -13,11 +14,13 @@ class App extends Component {
 
     this.state = {
       inventory: [],
+      selectedId: {},
     }
   }
 
-  componentDidMount() {
-    axios.get('./api/inventory').then(response => {
+  componentDidMount = () => {
+    axios.get(BASE_URL + '/api/inventory').then(response => {
+      //console.log(response.data)
       this.setState({ inventory: response.data })
     })
   }
